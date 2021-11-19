@@ -5,16 +5,16 @@ import './Header.css'
 
 const Header = () => {
 	return (
-		<section className="header">
-			<section className="header-top">
-				<section className="header-top_logo">
+		<div className="header">
+			<div className="header-top">
+				<div className="header-top_logo">
 					<a href="/" className="header-logo">Matcha</a>
-				</section>
-				<section className="header-top_navbar">
+				</div>
+				<div className="header-top_navbar">
 					<Navbar />
-				</section>
-			</section>
-		</section>
+				</div>
+			</div>
+		</div>
 	)
 }
 export default Header;

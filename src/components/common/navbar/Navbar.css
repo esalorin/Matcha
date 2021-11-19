@@ -18,3 +18,7 @@
 .navbar-item:hover	{
 	border-bottom: 4px solid #FF5B6F;
 }
+
+.navbar-item.active	{
+	border-bottom: 4px solid #FF5B6F;
+}

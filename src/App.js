@@ -6,15 +6,18 @@ import Register from './pages/Register';
 import './App.css';
 
 const App = () => (
-  <div className="App">
-	  <Router>
-		<Header />
-		<Routes>
-			<Route path='/login' exact component={Login}/>
-			<Route path='/register' component={Register}/>
-		</Routes>
-	  </Router>
-  </div>
+	<div className="App">
+		<Router>
+			<Header />
+			<Routes>
+				<Route exact path='/login' element={<Login/>}/>
+				<Route exact path='/register' element={<Register/>}/>
+				<Route exact path='/home' element={<Login/>}/>
+				<Route exact path='/chat' element={<Register/>}/>
+				<Route exact path='/profile' element={<Login/>}/>
+			</Routes>
+		</Router>
+	</div>
 )
 
 export default App;
