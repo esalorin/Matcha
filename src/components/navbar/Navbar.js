@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import './Navbar.css'
 
@@ -12,8 +12,8 @@ const Navbar = () => {
 			<a href="/chat" className="navbar-item"><img src='/icons/chat.png' alt="chat"/></a>
 			<a href="/profile" className="navbar-item"><img src='/icons/profile.png' alt="profile"/></a> 
 			<a href="/login" className="navbar-item" onClick={logout}>Log out</a>*/}
-			<Link to="/login" className="navbar-item" >Login</Link>
-			<Link to="/register" className="navbar-item" >Register</Link>
+			<NavLink className="navbar-item" to="/login">Login</NavLink>
+			<NavLink className="navbar-item" to="/register">Register</NavLink>
 		</div>
 	);
 }

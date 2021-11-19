@@ -31,7 +31,7 @@ const LoginForm = () => {
 				<br/>
 				<Button type="submit" text="Login"/>
 			</form>
-			<Link to="">Forgot a password?</Link>
+			<Link className="forgot-password-link" to="">Forgot a password?</Link>
 			</div>
 		</div>
 	)

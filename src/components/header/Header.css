@@ -26,8 +26,8 @@
 
 .header-top_navbar	{
 	display: flex;
+	height: 100%;
 	justify-content: right;
-	padding: 20px;
 	color: #FF5B6F;
 	flex: 1;
 }

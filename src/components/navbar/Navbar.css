@@ -1,6 +1,9 @@
 .navbar	{
 	display: flex;
+	text-align: center;
+	height: 100%;
 	flex-direction: row;
+	margin-right: 20px;
 }
 
 .navbar-item	{
@@ -19,6 +22,6 @@
 	border-bottom: 4px solid #FF5B6F;
 }
 
-.navbar-item.active	{
+.active	{
 	border-bottom: 4px solid #FF5B6F;
 }
