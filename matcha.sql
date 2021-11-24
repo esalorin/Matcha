@@ -228,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lname` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `verified` enum('0','1') NOT NULL DEFAULT '0',
-  `otp` varchar(50) NOT NULL,
+  `otp` varchar(50),
   `register_time` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
