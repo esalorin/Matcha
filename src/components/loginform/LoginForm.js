@@ -15,6 +15,14 @@ const LoginForm = () => {
 			}
 		);
 	}
+	
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		axios.post("http://localhost:3001/login", input)
+		.then((res) => {
+			console.log(res)
+		});
+	}
 
 	return (
 		<div >
