@@ -21,6 +21,8 @@ const RegisterForm = () => {
 		axios.post("http://localhost:3001/register", input)
 		.then((res) => {
 			console.log(res)
+			if (res.data === 'Success')
+				window.location.assign("/verify");
 		});
 	}
 

@@ -32,10 +32,15 @@ app.get("/", (req, res) => {
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp-mail.outlook.com',
+  secureConnection: false,
+  port: 587,
+  tls: {
+	  cciphers:'SSLv3'
+  },
   auth: {
-    user: 'youremail@gmail.com',
-    pass: 'yourpassword'
+    user: 'matcha.app.no-reply@outlook.com',
+    pass: 'Match4Ema!l'
   }
 });
 
@@ -72,31 +77,31 @@ app.post("/register", (req, res) => {
 						if (err) {
 							console.error(err);
 						}
-
+						var otp = register.data.generateOtp();
 						pool.query(
-							"INSERT INTO users (username, email, fname, lname, password, verified) VALUES(?, ?, ?, ?, ?, ?)",
-							[data.username, data.email, data.firstName, data.lastName, hash, '0'], (err, result) => {
+							"INSERT INTO users (username, email, fname, lname, password, verified, otp) VALUES(?, ?, ?, ?, ?, ?, ?)",
+							[data.username, data.email, data.firstName, data.lastName, hash, '0', otp], (err, result) => {
 								if (err) {
 									console.error(err);
 									return;
 								}
 
 								var mailOptions = {
-									from: 'youremail@gmail.com',
-									to: 'myfriend@yahoo.com',
-									subject: 'Sending Email using Node.js',
-									text: 'That was easy!'
+									from: '"Matcha" matcha.app.no-reply@outlook.com',
+									to: data.email,
+									subject: 'Account verification',
+									text: 'Hi ' + data.username + '!\n Thanks for signing up!\n You can find the account verification code below. \n' + otp
 								  };
 								  
 								  transporter.sendMail(mailOptions, function(error, info){
 									if (error) {
-									  console.log(error);
+									  console.error(error);
 									} else {
 									  console.log('Email sent: ' + info.response);
 									}
 								  });
 
-								res.send("Success!");
+								res.send("Success");
 							});
 						});
 					});
