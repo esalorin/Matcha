@@ -90,7 +90,9 @@ app.post("/register", (req, res) => {
 									from: '"Matcha" matcha.app.no-reply@outlook.com',
 									to: data.email,
 									subject: 'Account verification',
-									text: 'Hi ' + data.username + '!\n Thanks for signing up!\n You can find the account verification code below. \n' + otp
+									text: 'Hi ' + data.username + '!\n Thanks for signing up!\n You can find the account verification code below. \n' + otp +
+									'\nOr you can use this link to finish registration: ' +
+									'http://localhost:3001/verify?email=' + data.email + '&code=' + otp
 								  };
 								  
 								  transporter.sendMail(mailOptions, function(error, info){
@@ -140,6 +142,42 @@ app.post("/login", (req, res) => {
 		}
 	);
 });
+
+app.get("/verify", (req, res) => {
+	const email = req.query.email;
+	const code = req.query.code;
+
+	if (email.length == 0 || code.length != 10)
+		res.redirect('/')
+	else {
+		pool.query(
+			"SELECT * FROM users WHERE email = ? AND otp = ?",
+			[email, code], (err, result) => {
+				if (err) {
+					console.error(err);
+					return;
+				}
+	
+				else if (result.length > 0) {
+					pool.query(
+						"UPDATE users SET verified = '1', otp = NULL WHERE email = ?", email, (err, result) => {
+							if (err) {
+								console.error(err);
+								return;
+							}
+							else if (result) {
+								res.redirect("http://localhost:3000/login");
+							}
+						}
+					)
+				}
+				else {
+					res.redirect('/')
+				}
+			}
+		);
+	}
+})
 
 app.listen(port, (err) => {
 	if (err) {
