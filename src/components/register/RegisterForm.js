@@ -14,12 +14,20 @@ const RegisterForm = () => {
 			}
 		);
 	}
+	
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		axios.post("http://localhost:3001/register", input)
+		.then((res) => {
+			console.log(res)
+		});
+	}
 
 	return (
 		<div >
 			<h1 className="form-header">Register</h1>
 			<div className="register-form">
-			<form>
+			<form onSubmit={handleSubmit}>
 				<div className="register-names">
 					<div>
 						<label >First Name:</label>
