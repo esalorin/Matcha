@@ -28,7 +28,7 @@ const LoginForm = () => {
 		<div >
 			<h1 className="form-header">Login</h1>
 			<div className="login-form">
-			<form>
+			<form onSubmit={handleSubmit}>
 				<label >Username:</label>
 				<br/>
 				<input className="login-form-input" name="username" type="text" value={input.username} onChange={(event) => handleInputChange(event)}></input>
