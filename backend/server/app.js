@@ -16,7 +16,7 @@ const pool = mysql.createPool({
 	port			:	3306
 });
 
-const register = require("../controllers/register");
+const register = require("../helpers/register");
 const { response } = require("express");
 
 const app = express();
@@ -29,6 +29,15 @@ app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'youremail@gmail.com',
+    pass: 'yourpassword'
+  }
+});
 
 app.post("/register", (req, res) => {
 	//	Data object for user input
@@ -71,6 +80,22 @@ app.post("/register", (req, res) => {
 									console.error(err);
 									return;
 								}
+
+								var mailOptions = {
+									from: 'youremail@gmail.com',
+									to: 'myfriend@yahoo.com',
+									subject: 'Sending Email using Node.js',
+									text: 'That was easy!'
+								  };
+								  
+								  transporter.sendMail(mailOptions, function(error, info){
+									if (error) {
+									  console.log(error);
+									} else {
+									  console.log('Email sent: ' + info.response);
+									}
+								  });
+
 								res.send("Success!");
 							});
 						});
