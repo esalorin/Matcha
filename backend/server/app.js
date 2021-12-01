@@ -4,6 +4,10 @@ const dotenv = require("dotenv").config();
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+
 const saltRounds = bcrypt.genSalt(10);
 
 const pool = mysql.createPool({
@@ -24,10 +28,28 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+	origin: ["http://localhost:3000"],
+	methods: ["GET", "POST"],
+	credentials: true
+
+}));
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true}));
+
+app.use(
+	session({
+		key: "userId",
+		secret: "subscribe",
+		resave: false,
+		saveUninitialized: false,
+		cookie: {
+			expires: 24 * 60 * 60 * 1000,
+		},
+	}));
 
 var nodemailer = require('nodemailer');
 
@@ -67,7 +89,7 @@ app.post("/register", (req, res) => {
 				return;
 			}
 			else if (result.length !== 0) {
-				res.send("Email or username already taken");
+				res.send({ message: "Email or username already taken"});
 			}
 			else {
 				//	At this point all data is valid and user can be registered. //	First we hash te password and then we insert data to db
@@ -111,8 +133,20 @@ app.post("/register", (req, res) => {
 			});
 	}
 	else
-		res.send(output);
+		res.send({ message: output});
 });
+
+app.get("/login", (req, res) => {
+	if (req.session.user) {
+		res.send({
+			loggedIn: true,
+			user: req.session.user
+		});
+	}
+	else {
+		res.send({ loggedIn: false });
+	}
+})
 
 app.post("/login", (req, res) => {
 	const username = req.body.username.trim();
@@ -127,17 +161,24 @@ app.post("/login", (req, res) => {
 			}
 
 			if (result.length > 0) {
-				bcrypt.compare(password, result[0].password, (err, result) => {
-					if (result) {
-						res.send("Logged in");
+				bcrypt.compare(password, result[0].password, (err, response) => {
+					if (response) {
+						if (result[0].verified == "1") {
+							req.session.user = result;
+							console.log(req.session.user)
+							res.send(result);
+						}
+						else {
+							res.send({verified: false});
+						}
 					}
 					else {
-						res.send("Wrong username or password");
+						res.send({ message : "Wrong username or password"});
 					}
 				});
 			}
 			else {
-				res.send("User doesn't exist");
+				res.send({ message: "Wrong username or password"});
 			}
 		}
 	);

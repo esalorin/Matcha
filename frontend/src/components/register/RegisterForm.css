@@ -54,6 +54,12 @@
 	margin-top: 35px;
 }
 
+.error-message {
+	color: red;
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+
 @media screen and (max-width: 550px)	{
 	.register-form {
 		width: 90%;

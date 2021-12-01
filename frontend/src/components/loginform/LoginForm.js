@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import {Button} from '..';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import './LoginForm.css';
 
 const LoginForm = () => {
 	const [ input, setInput ] = useState({ username: "", password: "" })
+	const [ loginStatus, setLoginStatus ] = useState("");
+
+	axios.defaults.withCredentials = true
 
 	const handleInputChange = (event) => {
 		const target = event.target;
@@ -21,14 +24,28 @@ const LoginForm = () => {
 		event.preventDefault();
 		axios.post("http://localhost:3001/login", input)
 		.then((res) => {
-			console.log(res)
+			if (res.data.message) {
+				setLoginStatus(res.data.message);
+			}
+			else if (res.data.verified === false)
+				window.location.assign("/verify");
 		});
 	}
+
+	useEffect(() => {
+		axios.get("http://localhost:3001/login")
+		.then((res) => {
+			if (res.data.loggedIn === true) {
+				window.location.assign("/");
+			}
+		});
+	}, []);
 
 	return (
 		<div >
 			<h1 className="form-header">Login</h1>
 			<div className="login-form">
+				<p className="error-message">{loginStatus}</p>
 			<form onSubmit={handleSubmit}>
 				<label >Username:</label>
 				<br/>

@@ -4,7 +4,8 @@ import axios from 'axios';
 import './RegisterForm.css';
 
 const RegisterForm = () => {
-	const [ input, setInput ] = useState({ firstName: "", lastName: "", username: "", email: "", password: "" })
+	const [ input, setInput ] = useState({ firstName: "", lastName: "", username: "", email: "", password: "" });
+	const [ regStatus, setRegStatus] = useState("");
 
 	const handleInputChange = (event) => {
 		const target = event.target;
@@ -20,8 +21,10 @@ const RegisterForm = () => {
 		event.preventDefault();
 		axios.post("http://localhost:3001/register", input)
 		.then((res) => {
-			console.log(res)
-			if (res.data === 'Success')
+			if (res.data.message) {
+				setRegStatus(res.data.message);
+			}
+			else if (res.data === 'Success')
 				window.location.assign("/verify");
 		});
 	}
@@ -30,6 +33,7 @@ const RegisterForm = () => {
 		<div >
 			<h1 className="form-header">Register</h1>
 			<div className="register-form">
+				<p className="error-message">{regStatus}</p>
 			<form onSubmit={handleSubmit}>
 				<div className="register-names">
 					<div>
