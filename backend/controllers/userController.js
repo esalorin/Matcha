@@ -31,28 +31,33 @@ exports.registerUser = async (req, res, next) => {
 		let result = await user.findUsersByUnameAndEmail();
 
 		if (result.length !== 0) {
-			res.send({ message: "Email or username already taken"});
+			if (result[0].email == data.email)
+				res.send({ message: "This email is already registered" });
+			else
+				res.send({ message: "This username is already taken" });
+
 		}
+		else {
+			result = await user.insertNewUser();
+			if (result) {
+				var mailOptions = {
+					from: '"Matcha" matcha.app.no-reply@outlook.com',
+					to: data.email,
+					subject: 'Account verification',
+					text: 'Hi ' + data.username + '!\n Thanks for signing up!\n You can find the account verification code below. \n' + data.otp +
+					'\nOr you can use this link to finish registration: ' +
+					'http://localhost:3001/user/verify?email=' + data.email + '&code=' + data.otp
+					};
 
-		result = await user.insertNewUser();
-		if (result) {
-			var mailOptions = {
-				from: '"Matcha" matcha.app.no-reply@outlook.com',
-				to: data.email,
-				subject: 'Account verification',
-				text: 'Hi ' + data.username + '!\n Thanks for signing up!\n You can find the account verification code below. \n' + data.otp +
-				'\nOr you can use this link to finish registration: ' +
-				'http://localhost:3001/user/verify?email=' + data.email + '&code=' + data.otp
-				};
-
-				mail.sendMail(mailOptions, function(error, info){
-				if (error) {
-					console.error(error);
-				} else {
-					console.log('Email sent: ' + info.response);
-				}
-				});
-			res.send("Success");
+					mail.sendMail(mailOptions, function(error, info){
+					if (error) {
+						console.error(error);
+					} else {
+						console.log('Email sent: ' + info.response);
+					}
+					});
+				res.send("Success");
+			}
 		}
 
 	}
