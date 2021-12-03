@@ -126,12 +126,12 @@ exports.loginUser = async (req, res, next) => {
 				}
 			}
 			else {
-				res.send({ message : "Wrong username or password"});
+				res.send({ error : "Wrong username or password"});
 			}
 		});
 	}
 	else {
-		res.send({ message: "Wrong username or password"});
+		res.send({ error: "Wrong username or password"});
 	}
 }
 
