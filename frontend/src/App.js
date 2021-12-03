@@ -17,9 +17,9 @@ const App = () => {
 			<Header />
 			<Routes>
 				<Route exact path='/' element={<Home/>}/>
-				<Route exact path='/login' element={<Login/>}/>
-				<Route exact path='/register' element={<Register/>}/>
-				<Route exact path='/verify' element={<Verify/>}/>
+				<Route exact path='/user/login' element={<Login/>}/>
+				<Route exact path='/user/register' element={<Register/>}/>
+				<Route exact path='/user/verify' element={<Verify/>}/>
 				{/* This when logged in:
 				<Route exact path='/' element={<Browse/>}/>
 				<Route exact path='/chat' element={<Chat/>}/>

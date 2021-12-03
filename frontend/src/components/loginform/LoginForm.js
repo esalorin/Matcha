@@ -19,25 +19,28 @@ const LoginForm = () => {
 			}
 		);
 	}
-	
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		axios.post("http://localhost:3001/login", input)
+		axios.post("http://localhost:3001/user/login", input)
 		.then((res) => {
 			if (res.data.message) {
 				setLoginStatus(res.data.message);
+				window.location.assign("/");
 			}
 			else if (res.data.verified === false)
-				window.location.assign("/verify");
+				window.location.assign("/user/verify");
 		});
 	}
 
 	useEffect(() => {
-		axios.get("http://localhost:3001/login")
+		axios.get("http://localhost:3001/user/login")
 		.then((res) => {
 			if (res.data.loggedIn === true) {
 				window.location.assign("/");
 			}
+			else
+				console.log(res.data);
 		});
 	}, []);
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Button} from '..';
 import axios from 'axios';
 import './RegisterForm.css';
@@ -16,18 +16,30 @@ const RegisterForm = () => {
 			}
 		);
 	}
-	
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		axios.post("http://localhost:3001/register", input)
+		axios.post("http://localhost:3001/user/register", input)
 		.then((res) => {
 			if (res.data.message) {
 				setRegStatus(res.data.message);
 			}
 			else if (res.data === 'Success')
-				window.location.assign("/verify");
+				window.location.assign("/user/verify");
 		});
 	}
+
+	useEffect(() => {
+		axios.get("http://localhost:3001/user/register")
+		.then((res) => {
+			if (res.data.loggedIn === true) {
+				window.location.assign("/");
+			}
+			else
+				console.log(res.data);
+		});
+	}, []);
+
 
 	return (
 		<div >

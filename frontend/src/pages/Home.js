@@ -3,8 +3,8 @@ import '../App.css';
 
 const Home = () => {
 	const homePageStyle = {
-		width: "100vw",
-		height: "100vh",
+		width: "100%",
+		height: "calc(100vh - 100px)",
 		backgroundColor: "#FF5B6F",
 		textAlign: "center",
 		paddingTop: "100px",
