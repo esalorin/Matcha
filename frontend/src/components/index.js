@@ -4,6 +4,7 @@ import LoginForm from './loginform';
 import RegisterForm from './register';
 import Button from './button';
 import VerifyForm from './verify';
+import ProfilePictures from './profilepictures';
 
 export {
 	Header,
@@ -11,5 +12,6 @@ export {
 	LoginForm,
 	RegisterForm,
 	Button,
-	VerifyForm
+	VerifyForm,
+	ProfilePictures
 }
