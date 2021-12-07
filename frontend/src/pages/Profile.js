@@ -1,9 +1,10 @@
 import React from 'react';
+import { ProfilePictures } from '../components';
 
 const Profile = () => {
 	return (
 		<div>
-			Hello this is profile
+			<ProfilePictures />
 		</div>
 	)
 }
