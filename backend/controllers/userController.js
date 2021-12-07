@@ -123,7 +123,7 @@ exports.loginUser = async (req, res, next) => {
 		bcrypt.compare(data.password, result[0].password, (err, response) => {
 			if (response) {
 				if (result.length === 1 && result[0].verified === "1") {
-					req.session.user = result[0];
+					req.session.user = result[0].username;
 					res.send({message: "loggedIn", loggedIn: true});
 				}
 				else {
@@ -143,10 +143,18 @@ exports.loginUser = async (req, res, next) => {
 exports.loginGetUser = (req, res, next) => {
 	if (req.session.user)
 		res.send({loggedIn:true});
+	else
+		res.send({loggedIn: false});
 }
 
 exports.registerGetUser = (req, res, next) => {
 	if (req.session.user)
 		res.send({loggedIn:true});
+}
+
+exports.authUser = (req, res, next) => {
+	if (req.session.user) {
+		res.send({loggedIn:true});
+	}
 }
 
