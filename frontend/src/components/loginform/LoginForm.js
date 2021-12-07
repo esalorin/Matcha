@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {Button} from '..';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import './LoginForm.css';
 
 const LoginForm = () => {
 	const [ input, setInput ] = useState({ username: "", password: "" })
 	const [ loginStatus, setLoginStatus ] = useState("");
+	const [ loggedIn, setLoggedIn ] = useState(false);
 
 	axios.defaults.withCredentials = true
 
@@ -39,33 +40,36 @@ const LoginForm = () => {
 		axios.get("http://localhost:3001/user/login")
 		.then((res) => {
 			if (res.data.loggedIn === true) {
-				window.location.assign("/");
+				setLoggedIn(true);
 			}
-			else
-				console.log(res.data);
 		});
 	}, []);
 
-	return (
-		<div >
-			<h1 className="form-header">Login</h1>
-			<div className="login-form">
-				<p className="error-message">{loginStatus}</p>
-			<form onSubmit={handleSubmit}>
-				<label >Username:</label>
-				<br/>
-				<input className="login-form-input" name="username" type="text" value={input.username} onChange={(event) => handleInputChange(event)}></input>
-				<br/>
-				<label >Password:</label>
-				<br/>
-				<input className="login-form-input" name="password" type="password" value={input.password} onChange={(event) => handleInputChange(event)}></input>
-				<br/>
-				<Button type="submit" text="Login"/>
-			</form>
-			<Link className="forgot-password-link" to="">Forgot a password?</Link>
+	if (loggedIn) {
+		return <Navigate to='/' />
+	}
+	else if(!loggedIn) {
+		return (
+			<div >
+				<h1 className="form-header">Login</h1>
+				<div className="login-form">
+					<p className="error-message">{loginStatus}</p>
+				<form onSubmit={handleSubmit}>
+					<label >Username:</label>
+					<br/>
+					<input className="login-form-input" name="username" type="text" value={input.username} onChange={(event) => handleInputChange(event)}></input>
+					<br/>
+					<label >Password:</label>
+					<br/>
+					<input className="login-form-input" name="password" type="password" value={input.password} onChange={(event) => handleInputChange(event)}></input>
+					<br/>
+					<Button type="submit" text="Login"/>
+				</form>
+				<Link className="forgot-password-link" to="">Forgot a password?</Link>
+				</div>
 			</div>
-		</div>
-	)
+		);
+	}
 }
 
 export default LoginForm;
