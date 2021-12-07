@@ -1,9 +1,9 @@
 import Header from './header';
 import Navbar from './navbar';
-import LoginForm from './loginform';
-import RegisterForm from './register';
+import LoginForm from './forms/LoginForm';
+import RegisterForm from './forms/RegisterForm';
 import Button from './button';
-import VerifyForm from './verify';
+import VerifyForm from './forms/VerifyForm';
 import ProfilePictures from './profilepictures';
 
 export {

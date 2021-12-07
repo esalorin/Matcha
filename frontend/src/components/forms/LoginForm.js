@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate } from "react-router-dom";
 import {Button} from '..';
 import axios from 'axios';
-import './LoginForm.css';
+import './Forms.css';
 
 const LoginForm = () => {
 	const [ input, setInput ] = useState({ username: "", password: "" })
@@ -52,16 +52,12 @@ const LoginForm = () => {
 		return (
 			<div >
 				<h1 className="form-header">Login</h1>
-				<div className="login-form">
+				<div className="form-div">
 					<p className="error-message">{loginStatus}</p>
 				<form onSubmit={handleSubmit}>
-					<label >Username:</label>
+					<input className="form-input" name="username" type="text" placeholder="Username" value={input.username} onChange={(event) => handleInputChange(event)}></input>
 					<br/>
-					<input className="login-form-input" name="username" type="text" value={input.username} onChange={(event) => handleInputChange(event)}></input>
-					<br/>
-					<label >Password:</label>
-					<br/>
-					<input className="login-form-input" name="password" type="password" value={input.password} onChange={(event) => handleInputChange(event)}></input>
+					<input className="form-input" name="password" type="password" placeholder="Password" value={input.password} onChange={(event) => handleInputChange(event)}></input>
 					<br/>
 					<Button type="submit" text="Login"/>
 				</form>

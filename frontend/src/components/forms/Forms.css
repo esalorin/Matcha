@@ -1,10 +1,11 @@
-.verify-form	{
+.form-div	{
 	margin: auto;
 	margin-top: 50px;
-	padding-top: 50px;
-	width: 400px;
+	padding-top: 70px;
+	padding-bottom: 40px;
+	width: 450px;
 	font-size: 20px;
-	height: 200px;
+	height: max-content;
 	text-align: center;
 	background-color: white;
 	border-radius: 10px;
@@ -17,7 +18,7 @@
 	font-weight: normal;
 }
 
-.verify-input {
+.form-input {
 	margin-top: 10px;
 	margin-bottom: 30px;
 	float: left;
@@ -30,16 +31,40 @@
 	font-size: 17px;
 }
 
-.login-form Button {
-	margin-top: 30px;
+.form-div Button {
+	margin-top: 50px;
+}
+
+.forgot-password-link {
+	font-size: 16px;
+}
+
+.register-names {
+	display: flex;
+	width: 100%;
+}
+.register-names div{
+	width: 50%;
+}
+.register-names input{
+	float: left;
+	width: 70%;
+	margin-left: 15%;
+}
+
+.error-message {
+	color: red;
+	font-size: 15px;
+	margin-bottom: 20px;
 }
 
 @media screen and (max-width: 550px)	{
-	.verify-form {
+	.form-div {
 		width: 90%;
+		height: 380px;
 		font-size: 15px;
 	}
-	.verifyinput {
+	.form-input {
 		font-size: 12px;
 		margin-bottom: 20px;
 		height: 30px;
