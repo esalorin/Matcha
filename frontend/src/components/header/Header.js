@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import './Header.css'
 
-const Header = () => {
+const Header = (props) => {
 	const [windowDimension, setWindowDimension] = useState(null);
 
 	useEffect(() => {
@@ -21,7 +21,6 @@ const Header = () => {
 	}, []);
 
 	const isMobile = windowDimension <= 640;
-
 	return (
 		<div className="header">
 			<div className="header-top">
@@ -30,7 +29,7 @@ const Header = () => {
 					{/*<div> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>*/}
 				</div>
 				<div className="header-top_navbar">
-					<Navbar />
+					<Navbar loginStatus={props.loginStatus} setLoggedIn={props.setLoggedIn} />
 				</div>
 			</div>
 		</div>

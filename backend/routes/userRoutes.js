@@ -16,5 +16,7 @@ router.get("/verify", userController.verifyGetUser);
 
 router.get("/auth", userController.authUser);
 
+router.get("/logout", userController.logOut);
+
 
 module.exports = router;

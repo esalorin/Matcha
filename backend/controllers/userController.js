@@ -150,11 +150,27 @@ exports.loginGetUser = (req, res, next) => {
 exports.registerGetUser = (req, res, next) => {
 	if (req.session.user)
 		res.send({loggedIn:true});
+	else
+		res.send({loggedIn: false});
 }
 
 exports.authUser = (req, res, next) => {
 	if (req.session.user) {
 		res.send({loggedIn:true});
 	}
+	else
+		res.send({loggedIn: false});
 }
 
+exports.logOut = (req, res, next) => {
+	req.session.destroy(function(err) {
+		if (err) {
+			console.log(err);
+			res.send({loggedIn: true});
+		}
+		else
+			res.clearCookie("userId");
+			res.send({loggedIn: false});
+			
+	  })
+}

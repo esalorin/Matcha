@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, Navigate } from "react-router-dom";
 import {Button} from '..';
 import axios from 'axios';
 import './Forms.css';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
 	const [ input, setInput ] = useState({ username: "", password: "" })
 	const [ loginStatus, setLoginStatus ] = useState("");
-	const [ loggedIn, setLoggedIn ] = useState(false);
 
 	axios.defaults.withCredentials = true
 
@@ -25,8 +24,8 @@ const LoginForm = () => {
 		event.preventDefault();
 		axios.post("http://localhost:3001/user/login", input)
 		.then((res) => {
-			if (res.data.message === "loggedIn") {
-				window.location.assign("/");
+			if (res.data.loggedIn === true) {
+				props.setLoggedIn(true);
 			}
 			else if (res.data.error) {
 				setLoginStatus(res.data.error);
@@ -36,19 +35,10 @@ const LoginForm = () => {
 		});
 	}
 
-	useEffect(() => {
-		axios.get("http://localhost:3001/user/login")
-		.then((res) => {
-			if (res.data.loggedIn === true) {
-				setLoggedIn(true);
-			}
-		});
-	}, []);
-
-	if (loggedIn) {
+	if (props.loginStatus) {
 		return <Navigate to='/' />
 	}
-	else if(!loggedIn) {
+	else if(!props.loginStatus) {
 		return (
 			<div >
 				<h1 className="form-header">Login</h1>
