@@ -124,7 +124,7 @@ exports.loginUser = async (req, res, next) => {
 			if (response) {
 				if (result.length === 1 && result[0].verified === "1") {
 					req.session.user = result[0].username;
-					res.send({message: "loggedIn", loggedIn: true});
+					res.send({loggedIn: true});
 				}
 				else {
 					res.send({verified: false});
@@ -163,14 +163,18 @@ exports.authUser = (req, res, next) => {
 }
 
 exports.logOut = (req, res, next) => {
-	req.session.destroy(function(err) {
-		if (err) {
-			console.log(err);
-			res.send({loggedIn: true});
-		}
-		else
-			res.clearCookie("userId");
-			res.send({loggedIn: false});
-			
-	  })
+	if (req.session.user) {
+		req.session.destroy(function(err) {
+			if (err) {
+				console.log(err);
+				res.send({loggedIn: true});
+			}
+			else
+				res.clearCookie("userId");
+				res.send({loggedIn: false});
+				
+		  })
+	}
+	else
+		res.end();
 }

@@ -15,10 +15,11 @@ const App = () => {
 
 	const [ loggedIn, setLoggedIn] = useState();
 
+	axios.defaults.withCredentials = true
+
 	useEffect(() => {
 		axios.get("http://localhost:3001/user/auth")
 		.then((res) => {
-			console.log(res.data.loggedIn);
 			if (res.data.loggedIn === true) {
 				setLoggedIn(true);
 			}
@@ -26,7 +27,7 @@ const App = () => {
 				setLoggedIn(false);
 
 		});
-	}, []);
+	}, [loggedIn]);
 
 	if (loggedIn){
 		return (

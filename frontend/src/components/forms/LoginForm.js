@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {Button} from '..';
 import axios from 'axios';
 import './Forms.css';
@@ -25,7 +25,13 @@ const LoginForm = (props) => {
 		axios.post("http://localhost:3001/user/login", input)
 		.then((res) => {
 			if (res.data.loggedIn === true) {
-				props.setLoggedIn(true);
+				axios.get("http://localhost:3001/user/login")
+				.then((res) => {
+					if (res.data.loggedIn === true) {
+						props.setLoggedIn(true);
+						window.location.assign('/');
+					}
+				});
 			}
 			else if (res.data.error) {
 				setLoginStatus(res.data.error);
@@ -35,10 +41,7 @@ const LoginForm = (props) => {
 		});
 	}
 
-	if (props.loginStatus) {
-		return <Navigate to='/' />
-	}
-	else if(!props.loginStatus) {
+	if(!props.loginStatus) {
 		return (
 			<div >
 				<h1 className="form-header">Login</h1>

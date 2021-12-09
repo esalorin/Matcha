@@ -7,6 +7,8 @@ const RegisterForm = () => {
 	const [ input, setInput ] = useState({ firstName: "", lastName: "", username: "", email: "", password: "" });
 	const [ regStatus, setRegStatus] = useState("");
 
+	axios.defaults.withCredentials = true
+
 	const handleInputChange = (event) => {
 		const target = event.target;
 		setInput(
@@ -35,8 +37,6 @@ const RegisterForm = () => {
 			if (res.data.loggedIn === true) {
 				window.location.assign("/");
 			}
-			else
-				console.log(res.data);
 		});
 	}, []);
 

@@ -6,6 +6,8 @@ import './Navbar.css'
 
 const Navbar = (props) => {
 
+	axios.defaults.withCredentials = true
+	
 	const loginStatus = props.setLoggedIn;
 	const logout = () => {
 		axios.get("http://localhost:3001/user/logout")
