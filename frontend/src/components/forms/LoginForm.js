@@ -4,7 +4,7 @@ import {Button} from '..';
 import axios from 'axios';
 import './Forms.css';
 
-const LoginForm = (props) => {
+const LoginForm = () => {
 	const [ input, setInput ] = useState({ username: "", password: "" })
 	const [ loginStatus, setLoginStatus ] = useState("");
 
@@ -24,15 +24,8 @@ const LoginForm = (props) => {
 		event.preventDefault();
 		axios.post("http://localhost:3001/user/login", input)
 		.then((res) => {
-			if (res.data.loggedIn === true) {
-				axios.get("http://localhost:3001/user/login")
-				.then((res) => {
-					if (res.data.loggedIn === true) {
-						props.setLoggedIn(true);
-						window.location.assign('/');
-					}
-				});
-			}
+			if (res.data.loggedIn === true)
+				window.location.assign('/');
 			else if (res.data.error) {
 				setLoginStatus(res.data.error);
 			}
@@ -41,8 +34,7 @@ const LoginForm = (props) => {
 		});
 	}
 
-	if(!props.loginStatus) {
-		return (
+	return (
 			<div >
 				<h1 className="form-header">Login</h1>
 				<div className="form-div">
@@ -57,8 +49,7 @@ const LoginForm = (props) => {
 				<Link className="forgot-password-link" to="">Forgot a password?</Link>
 				</div>
 			</div>
-		);
-	}
+	);
 }
 
 export default LoginForm;

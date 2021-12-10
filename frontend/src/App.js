@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {Header} from './components';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -17,8 +17,7 @@ const App = () => {
 
 	axios.defaults.withCredentials = true
 
-	useEffect(() => {
-		axios.get("http://localhost:3001/user/auth")
+	axios.get("http://localhost:3001/user/auth")
 		.then((res) => {
 			if (res.data.loggedIn === true) {
 				setLoggedIn(true);
@@ -27,13 +26,12 @@ const App = () => {
 				setLoggedIn(false);
 
 		});
-	}, [loggedIn]);
 
 	if (loggedIn){
 		return (
 			<div className="App">
 				<Router>
-					<Header loginStatus={loggedIn} setLoggedIn={setLoggedIn} />
+					<Header loginStatus={loggedIn} />
 					<Routes>
 						<Route exact path='/' element={<Browse/>}/>
 						<Route exact path='/user/register' element={<Register/>}/>
@@ -49,10 +47,10 @@ const App = () => {
 		return (
 			<div className="App">
 				<Router>
-					<Header loginStatus={loggedIn} setLoggedIn={setLoggedIn}/>
+					<Header loginStatus={loggedIn}/>
 					<Routes>
 						<Route exact path='/' element={<Home/>}/>
-						<Route exact path='/user/login' element={<Login loginStatus={loggedIn} setLoggedIn={setLoggedIn}/>}/>
+						<Route exact path='/user/login' element={<Login />}/>
 						<Route exact path='/user/register' element={<Register/>}/>
 						<Route exact path='/user/verify' element={<Verify/>}/>
 					</Routes>

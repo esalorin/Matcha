@@ -4,23 +4,21 @@ import { NavLink } from "react-router-dom";
 
 import './Navbar.css'
 
-const Navbar = (props) => {
+const Navbar = ({loginStatus}) => {
 
 	axios.defaults.withCredentials = true
-	
-	const loginStatus = props.setLoggedIn;
 	const logout = () => {
 		axios.get("http://localhost:3001/user/logout")
 		.then((res) => {
 			if (res.data.loggedIn === false) {
-				loginStatus(false);
+				window.location.assign('/user/login');
 			}
 			else
 				console.log(res.data);
 		});
 	}
 
-	if (props.loginStatus) {
+	if (loginStatus) {
 		return (
 			<div className="navbar">
 				<NavLink to="/" className="navbar-item"><img src='/icons/home.png' alt="home"/></NavLink>
@@ -31,7 +29,7 @@ const Navbar = (props) => {
 			</div>
 		);
 	}
-	else if(!props.loginStatus) {
+	else if(!loginStatus) {
 		return (
 		<div className="navbar">
 			<NavLink className="navbar-item" to="/user/login">Login</NavLink>

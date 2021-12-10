@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {Button} from '..';
 import axios from 'axios';
 import './Forms.css';
@@ -30,16 +30,6 @@ const RegisterForm = () => {
 				window.location.assign("/user/verify");
 		});
 	}
-
-	useEffect(() => {
-		axios.get("http://localhost:3001/user/register")
-		.then((res) => {
-			if (res.data.loggedIn === true) {
-				window.location.assign("/");
-			}
-		});
-	}, []);
-
 
 	return (
 		<div >
