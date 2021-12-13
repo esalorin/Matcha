@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const userRouter = require("../routes/userRoutes");
+const profileRouter = require("../routes/profileRoutes");
 const { response } = require("express");
 const sessionStore = require("../config/sessionStore");
 
@@ -33,11 +34,9 @@ app.use(
 	})
 );
 
+// Routes
 app.use("/user", userRouter);
-
-app.get("/", (req, res) => {
-	res.send("yessiir");
-})
+app.use("/profile", profileRouter);
 
 app.listen(port, (err) => {
 	if (err) {
