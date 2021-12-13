@@ -10,6 +10,7 @@ import Chat from './pages/Chat';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 import Browse from './pages/Browse';
+import ProfileSetup from './pages/ProfileSetup';
 import './App.css';
 
 const App = () => {
@@ -37,7 +38,8 @@ const App = () => {
 						<Route exact path='/' element={<Browse/>}/>
 						<Route exact path='/user/register' element={<Register/>}/>
 						<Route exact path='/chat' element={<Chat/>}/>
-						<Route exact path='/profile' element={<Profile/>}/>
+						<Route exact path='/profile/' element={<Profile/>}/>
+						<Route exact path='/profile/setup' element={<ProfileSetup/>}/>
 					</Routes>
 					<Footer loginStatus={loggedIn}/>
 				</Router>

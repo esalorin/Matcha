@@ -7,6 +7,7 @@ import RegisterForm from './forms/RegisterForm';
 import Button from './button';
 import VerifyForm from './forms/VerifyForm';
 import ProfilePictures from './profilepictures';
+import ProfileForm from './forms/ProfileForm';
 
 export {
 	Header,
@@ -17,5 +18,6 @@ export {
 	RegisterForm,
 	Button,
 	VerifyForm,
-	ProfilePictures
+	ProfilePictures,
+	ProfileForm
 }

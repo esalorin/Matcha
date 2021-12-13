@@ -24,8 +24,10 @@ const LoginForm = () => {
 		event.preventDefault();
 		axios.post("http://localhost:3001/user/login", input)
 		.then((res) => {
-			if (res.data.loggedIn === true)
+			if (res.data.loggedIn && res.data.profileActive)
 				window.location.assign('/');
+			else if (res.data.loggedIn && !res.data.profileActive)
+				window.location.assign('/profile/');
 			else if (res.data.error) {
 				setLoginStatus(res.data.error);
 			}

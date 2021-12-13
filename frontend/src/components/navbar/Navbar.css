@@ -11,7 +11,7 @@
 	height: 100%;
 	width: 100%;
 	flex-direction: row;
-	margin-right: 20px;
+	justify-content: space-evenly;
 }
 
 .navbar-item	{
@@ -29,7 +29,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-left: 14%;
 	color: inherit;
 	text-decoration: inherit;
 	text-transform: uppercase;

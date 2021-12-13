@@ -20,13 +20,17 @@
 	margin-left: 10px;
 }
 
-.header-logo{
+.header-logo	{
+	display: flex;
 	color: #FF5B6F;
 	text-decoration: inherit;
 	font-size: 40px;
+	align-items: center;
 }
+
 .header-logo img	{
 	height: 50px;
+	margin-right: 10px;
 	width: auto;
 }
 

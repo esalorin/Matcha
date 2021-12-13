@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProfilePictures.css";
 import BtnSlider from "./BtnSlider";
 import dataSlider from "./dataSlider";
+import axios from 'axios';
 
 
 const ProfilePictures = () => {
 
 	const [slideIndex, setSlideIndex ] = useState(1);
+	axios.defaults.withCredentials = true;
+
+	useEffect(() => {
+		axios.get("http://localhost:3001/profile").then((res) => {
+			console.log(res.data);
+		});
+	}, []);
 
 	const nextSlide = () => {
 		if (slideIndex !== dataSlider.length) {
