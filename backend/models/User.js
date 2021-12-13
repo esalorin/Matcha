@@ -44,7 +44,8 @@ class User {
 		let sql = `
 		SELECT * FROM users
 		WHERE email = ?
-		AND otp = ?`;
+		AND otp = ?
+		AND verified = '0'`;
 
 		const [user, _] =  await pool.execute(sql, [this.email, this.otp]);
 		return user;
@@ -61,11 +62,22 @@ class User {
 
 	async selectUser() {
 		let sql = `
-		SELECT * FROM users
-		WHERE username = ?`;
+		SELECT a.*, b.active
+		FROM users a JOIN profiles b
+		WHERE a.user_id = b.user_id
+		AND username = ?`;
 
 		const [user, _] = await pool.execute(sql, [this.username]);
 		return user;
+	}
+
+	async initProfile(user_id) {
+
+		let sql = `INSERT INTO profiles (user_id) SELECT users.user_id FROM users WHERE users.email = ?`;
+
+		const [newProfile, _] = await pool.execute(sql, [this.email]);
+
+		return newProfile;
 	}
 
 }
