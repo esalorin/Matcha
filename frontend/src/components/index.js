@@ -1,5 +1,7 @@
 import Header from './header';
-import Navbar from './navbar';
+import Footer from './footer';
+import FooterNavbar from './navbar/FooterNavbar';
+import HeaderNavbar from './navbar/HeaderNavbar';
 import LoginForm from './forms/LoginForm';
 import RegisterForm from './forms/RegisterForm';
 import Button from './button';
@@ -8,7 +10,9 @@ import ProfilePictures from './profilepictures';
 
 export {
 	Header,
-	Navbar,
+	Footer,
+	HeaderNavbar,
+	FooterNavbar,
 	LoginForm,
 	RegisterForm,
 	Button,

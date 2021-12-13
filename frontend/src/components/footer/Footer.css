@@ -1,0 +1,22 @@
+.footer	{
+	width: 100%;
+	background-color: white;
+	position: fixed;
+	height: 70px;
+	display: flex;
+	box-shadow: 1px 1px 4px grey;
+	bottom: 0;
+}
+
+.footer_navbar	{
+	display: flex;
+	height: 100%;
+	color: #FF5B6F;
+	flex: 1;
+}
+
+.header_top_separator	{
+	width: 100%;
+	color: grey;
+}
+

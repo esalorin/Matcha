@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { Navbar } from '..';
+import { HeaderNavbar } from '..';
 import { Link } from "react-router-dom";
 
 import './Header.css'
@@ -29,7 +29,7 @@ const Header = ({loginStatus}) => {
 					{/*<div> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>*/}
 				</div>
 				<div className="header-top_navbar">
-					<Navbar loginStatus={loginStatus} />
+					<HeaderNavbar loginStatus={loginStatus} />
 				</div>
 			</div>
 		</div>

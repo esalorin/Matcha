@@ -5,12 +5,31 @@
 	flex-direction: row;
 	margin-right: 20px;
 }
+.footer-navbar	{
+	display: flex;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	flex-direction: row;
+	margin-right: 20px;
+}
 
 .navbar-item	{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-left: 30px;
+	color: inherit;
+	text-decoration: inherit;
+	text-transform: uppercase;
+	border-bottom: 4px solid transparent;
+	outline: none;
+}
+.footer-navbar-item	{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 14%;
 	color: inherit;
 	text-decoration: inherit;
 	text-transform: uppercase;

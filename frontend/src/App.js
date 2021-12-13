@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {Header} from './components';
+import {Footer} from './components';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -38,6 +39,7 @@ const App = () => {
 						<Route exact path='/chat' element={<Chat/>}/>
 						<Route exact path='/profile' element={<Profile/>}/>
 					</Routes>
+					<Footer loginStatus={loggedIn}/>
 				</Router>
 			</div>
 		);
@@ -54,6 +56,7 @@ const App = () => {
 						<Route exact path='/user/register' element={<Register/>}/>
 						<Route exact path='/user/verify' element={<Verify/>}/>
 					</Routes>
+					<Footer loginStatus={loggedIn}/>
 				</Router>
 			</div>
 		);
