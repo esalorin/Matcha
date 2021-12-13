@@ -2,9 +2,6 @@ const User = require("../models/User");
 const helper = require("../helpers/userHelper");
 const bcrypt = require("bcrypt");
 const mail = require("../config/mail");
-//const express = require("express");
-//const session = require("express-session");
-//const app = express();
 
 exports.registerUser = async (req, res, next) => {
 
@@ -79,6 +76,7 @@ exports.verifyGetUser = async (req, res, next) => {
 		let result = await user.findUsersByEmailAndOtp();
 		if (result.length === 1) {
 			await user.setVerified();
+			await user.initProfile(result.user_id);
 			res.redirect("http://localhost:3000/user/login");
 		}
 		else {
@@ -101,6 +99,7 @@ exports.verifyPostUser = async (req, res, next) => {
 		let result = await user.findUsersByEmailAndOtp();
 		if (result.length === 1) {
 			await user.setVerified();
+			await user.initProfile(result.user_id);
 			res.send({message:"Verified"});
 		}
 		else {
@@ -124,7 +123,11 @@ exports.loginUser = async (req, res, next) => {
 			if (response) {
 				if (result.length === 1 && result[0].verified === "1") {
 					req.session.user = result[0].username;
-					res.send({loggedIn: true});
+					req.session.user_id = result[0].user_id;
+					if (result[0].active === "1")
+						res.send({ loggedIn: true, profileActive: true});
+					else
+						res.send({ loggedIn: true, profileActive: false});
 				}
 				else {
 					res.send({verified: false});
@@ -140,19 +143,6 @@ exports.loginUser = async (req, res, next) => {
 	}
 }
 
-exports.loginGetUser = (req, res, next) => {
-	if (req.session.user)
-		res.send({loggedIn:true});
-	else
-		res.send({loggedIn: false});
-}
-
-exports.registerGetUser = (req, res, next) => {
-	if (req.session.user)
-		res.send({loggedIn:true});
-	else
-		res.send({loggedIn: false});
-}
 
 exports.authUser = (req, res, next) => {
 	if (req.session.user) {
@@ -172,7 +162,7 @@ exports.logOut = (req, res, next) => {
 			else
 				res.clearCookie("userId");
 				res.send({loggedIn: false});
-				
+
 		  })
 	}
 	else
