@@ -4,11 +4,11 @@ const userController = require("../controllers/userController");
 
 router.post("/register", userController.registerUser);
 
-router.get("/register", userController.registerGetUser);
+router.get("/register", userController.authUser);
 
 router.post("/login", userController.loginUser);
 
-router.get("/login", userController.loginGetUser);
+router.get("/login", userController.authUser);
 
 router.post("/verify", userController.verifyPostUser)
 
