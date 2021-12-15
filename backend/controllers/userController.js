@@ -100,7 +100,7 @@ exports.verifyPostUser = async (req, res, next) => {
 		if (result.length === 1) {
 			await user.setVerified();
 			await user.initProfile(result.user_id);
-			res.send({message:"Verified"});
+			res.send({verified:true});
 		}
 		else {
 			res.send({verified:false});

@@ -18,7 +18,7 @@ const VerifyForm = () => {
 		event.preventDefault();
 		axios.post("http://localhost:3001/user/verify", input)
 		.then((res) => {
-			if (res.data.message) {
+			if (res.data.verified === true) {
 				window.location.assign("/user/login");
 			}
 			else if (res.data.verified === false)

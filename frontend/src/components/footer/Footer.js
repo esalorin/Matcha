@@ -20,12 +20,19 @@ const Footer = ({loginStatus}) => {
 	}, []);
 
 	const isMobile = windowDimension <= 640;
-	return (
-		<div className="footer">
-				<div className="footer_navbar">
-					{isMobile ? <FooterNavbar loginStatus={loginStatus} /> : <></>}
-				</div>
-		</div>
-	)
+	if (isMobile) {
+		return (
+			<div className="footer">
+					<div className="footer_navbar">
+						<FooterNavbar loginStatus={loginStatus}/>}
+					</div>
+			</div>
+		)
+	}
+	else {
+		return (
+			<></>
+		)
+	}
 }
 export default Footer;
