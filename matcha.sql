@@ -157,11 +157,11 @@ CREATE TABLE IF NOT EXISTS `profiles` (
   `profile_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `gender` enum('male','female','other') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `sexual_preference` enum('heterosexual','homosexual','bisexual') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `sexual_preference` enum('heterosexual','homosexual','bisexual') CHARACTER SET utf8mb4 DEFAULT NULL,
   `age` int DEFAULT NULL,
-  `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `location` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
   `fame_rating` tinyint NOT NULL DEFAULT '0',
-  `bio` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `bio` varchar(500) CHARACTER SET utf8mb4 DEFAULT NULL,
   `active` enum('0','1') NOT NULL DEFAULT '0',
   `activation_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`profile_id`),
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `reports` (
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
-  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `session_id` varchar(128) CHARACTER SET utf8mb4 NOT NULL,
   `expires` int UNSIGNED NOT NULL,
   `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   PRIMARY KEY (`session_id`)
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lname` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `verified` enum('0','1') NOT NULL DEFAULT '0',
-  `otp` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `otp` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
   `register_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
