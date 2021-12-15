@@ -156,7 +156,7 @@ DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE IF NOT EXISTS `profiles` (
   `profile_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `gender` enum('male','female','other') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `gender` enum('male','female','other') CHARACTER SET utf8mb4 DEFAULT NULL,
   `sexual_preference` enum('heterosexual','homosexual','bisexual') CHARACTER SET utf8mb4 DEFAULT NULL,
   `age` int DEFAULT NULL,
   `location` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
