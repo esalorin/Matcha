@@ -213,14 +213,6 @@ CREATE TABLE IF NOT EXISTS `tags` (
   PRIMARY KEY (`tag_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
---
--- Vedos taulusta `tags`
---
-
-INSERT INTO `tags` (`tag_id`, `tag`) VALUES
-(3, 'ruoka'),
-(4, 'bilettäminen');
-
 -- --------------------------------------------------------
 
 --
