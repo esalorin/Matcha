@@ -58,6 +58,39 @@
 	margin-bottom: 20px;
 }
 
+.form-body select {
+	height: 35px;
+	font-size: 17px;
+	text-align: center;
+	width: 85%;
+}
+
+.form-body label {
+	height: 35px;
+	width: 100%;
+	float: left;
+}
+
+.age {
+	text-align: center;
+}
+
+.progress-bar {
+	margin: 0 auto -60px auto;
+	width: 450px;
+	height: 25px;
+	background-color: white;
+	box-shadow: 0px 2px 5px rgb(159, 159, 159);
+	border-radius: 10px 10px 0px 0px;
+}
+
+.progress-bar div {
+	border-radius: 10px 10px 0px 0px;
+	width: 33.3%;
+	height: 100%;
+	background-color: #FF5B6F;
+}
+
 @media screen and (max-width: 550px)	{
 	.form-div {
 		width: 90%;
@@ -70,3 +103,67 @@
 		height: 30px;
 	}
 }
+/*
+
+.profile-setup-form {
+	margin: 100px auto;
+	width: 640px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	font-size: 20px;
+	text-align: center;
+	height: max-content;
+	border-radius: 10px;
+	box-shadow: 0px 2px 5px rgb(159, 159, 159);
+}
+
+.form-container {
+	width: 640px;
+}
+
+.form-header {
+	margin-top: 0px;
+}
+
+.form-input {
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+	background-color: rgb(249, 249, 249);
+	width: 80%;
+	height: 35px;
+	border: 1px solid rgb(210, 210, 210);
+	border-radius: 2px;
+	font-size: 17px;
+}
+
+.form-body {
+	width: 90%;
+	height: max-content;
+	display: block;
+	margin: auto;
+}
+
+.form-body select {
+	height: 35px;
+	font-size: 17px;
+	text-align: center;
+	width: 50%;
+}
+
+.form-body label {
+	height: 35px;
+	width: 100%;
+	float: left;
+}
+
+.age {
+	margin: 0 auto;
+	width: 50%;
+	float: unset;
+}
+
+.form-footer {
+	padding: 30px;
+}
+*/

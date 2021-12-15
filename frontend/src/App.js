@@ -16,12 +16,17 @@ import './App.css';
 const App = () => {
 
 	const [ loggedIn, setLoggedIn] = useState();
+	const [ profileActive, setProfileActive ] = useState();
 
 	axios.defaults.withCredentials = true
 
 	axios.get("http://localhost:3001/user/auth")
 		.then((res) => {
-			if (res.data.loggedIn === true) {
+			if (res.data.loggedIn && res.data.profileActive) {
+				setLoggedIn(true);
+				setProfileActive(true);
+			}
+			else if (res.data.loggedIn && !res.data.profileActive) {
 				setLoggedIn(true);
 			}
 			else
@@ -29,7 +34,7 @@ const App = () => {
 
 		});
 
-	if (loggedIn){
+	if (loggedIn && profileActive){
 		return (
 			<div className="App">
 				<Router>
@@ -39,6 +44,20 @@ const App = () => {
 						<Route exact path='/user/register' element={<Register/>}/>
 						<Route exact path='/chat' element={<Chat/>}/>
 						<Route exact path='/profile/' element={<Profile/>}/>
+						<Route exact path='/profile/setup' element={<ProfileSetup/>}/>
+					</Routes>
+					<Footer loginStatus={loggedIn}/>
+				</Router>
+			</div>
+		);
+	}
+
+	else if (loggedIn && !profileActive){
+		return (
+			<div className="App">
+				<Router>
+					<Header loginStatus={loggedIn} />
+					<Routes>
 						<Route exact path='/profile/setup' element={<ProfileSetup/>}/>
 					</Routes>
 					<Footer loginStatus={loggedIn}/>

@@ -27,7 +27,7 @@ const LoginForm = () => {
 			if (res.data.loggedIn && res.data.profileActive)
 				window.location.assign('/');
 			else if (res.data.loggedIn && !res.data.profileActive)
-				window.location.assign('/profile/');
+				window.location.assign('/profile/setup');
 			else if (res.data.error) {
 				setLoginStatus(res.data.error);
 			}

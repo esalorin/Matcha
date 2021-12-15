@@ -1,10 +1,10 @@
 import React from 'react';
-import { ProfileForm } from '../components';
+import { ProfileSetupForm } from '../components';
 
 const ProfileSetup = () => {
 	return (
 		<div>
-			<ProfileForm />
+			<ProfileSetupForm />
 		</div>
 	)
 }
