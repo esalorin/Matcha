@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 
 
-function MatchingInfo() {
+function MatchingInfo({formData, setFormData}) {
 	const [address, setAddress] = useState("");
 	const [coordinates, setCoordinates] = useState({
 		lat: null,
@@ -22,25 +22,38 @@ function MatchingInfo() {
 		console.log(value);
 
 	}
+	
+	const handleAge = (event) => {
+		setFormData({
+			...formData, age: event.target.value
+		})
+	}
 
 	return (
 		<div>
-			<label for="age">Enter your age: </label>
-			<input className="form-input age" name="age" id="age" type="number" min="18" max="120" placeholder="Age"></input>
+			<label htmlFor="age">Enter your age: </label>
+			<div className="age-container">
+				<input type="range" min="18" max="120" className="slider" value={formData.age} onChange={handleAge}></input>
+				<input className="form-input age" name="age" id="age" type="number" min="18" max="120" placeholder="Age" value={formData.age} onChange={handleAge}></input>
+			</div>
 			<br/>
-			<label for="gender">Select your gender: </label>
-			<select name="gender" id="gender">
+			<label htmlFor="gender">Select your gender: </label>
+			<select name="gender" id="gender" value={formData.gender} onChange={(event) => setFormData({
+				...formData, gender: event.target.value
+			})}>
 				<option value="male">Male</option>
 				<option value="female">Female</option>
 			</select>
 			<br/>
 			<br/>
-			<label for="sexuality">Select your sexuality: </label>
-			<select name="sexuality" id="sexuality">
+			<label htmlFor="sexuality">Select your sexuality: </label>
+			<select name="sexuality" id="sexuality" value={formData.sexuality} onChange={(event) => setFormData({
+				...formData, sexuality: event.target.value
+			})}>
 				<option value="heterosexual">Heterosexual</option>
 				<option value="homosexual">Homosexual</option>
 				<option value="bisexual">Bisexual</option>
-				<option value="bisexual">None of your business</option>
+				<option value="other">None of your business</option>
 			</select>
 			<br/>
 			<br/>
