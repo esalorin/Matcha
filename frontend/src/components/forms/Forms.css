@@ -71,8 +71,22 @@
 	float: left;
 }
 
+.age-container {
+	width: 85%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
 .age {
 	text-align: center;
+	width: 30%;
+}
+
+.slider {
+	width: 55%;
+	margin-bottom: 10px;
 }
 
 .progress-bar {
