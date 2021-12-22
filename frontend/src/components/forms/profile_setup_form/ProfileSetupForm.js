@@ -8,17 +8,38 @@ import PictureInfo from './PictureInfo.js';
 
 const ProfileSetupForm = () => {
 	const [page, setPage] = useState(0);
+	const [formData, setFormData] = useState({
+		age: "",
+		location: "",
+		gender: "",
+		sexuality: "",
+		tags: {
+			tag1: "",
+			tag2: "",
+			tag3: "",
+			tag4: "",
+			tag5: ""
+		},
+		bio: "",
+		profilePic: "",
+		images: {
+			image1: "",
+			image2: "",
+			image3: "",
+			image4: ""
+		}
+	});
+
 	const FormTitles = ["Dating information", "Tell us who you are", "Finally some pictures"];
 
+
 	const DisplayPage = () => {
-		if (page === 0) {
-			return <MatchingInfo />;
-		} else if (page === 1) {
-			return <PersonInfo />;
-		}
-		else {
-			return <PictureInfo />;
-		}
+		if (page === 0)
+			return <MatchingInfo formData={formData} setFormData={setFormData}/>;
+		else if (page === 1)
+			return <PersonInfo formData={formData} setFormData={setFormData}/>;
+		else
+			return <PictureInfo formData={formData} setFormData={setFormData}/>;
 	}
 
 	return (
