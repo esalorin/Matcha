@@ -10,19 +10,23 @@ function MatchingInfo({formData, setFormData}) {
 	});
 
 	const handleInputChange = (event) => {
-		setAddress(event);
+		setFormData({
+			...formData, location: event
+		});
 	}
-	
+
 	const handleSelect = async (value) => {
 		const result = await geocodeByAddress(value);
 		const latLng  = await getLatLng(result[0]);
-		setAddress(value);
+		setFormData({
+			...formData, location: value
+		});
 		setCoordinates(latLng);
 		console.log(latLng);
 		console.log(value);
 
 	}
-	
+
 	const handleAge = (event) => {
 		setFormData({
 			...formData, age: event.target.value
@@ -57,11 +61,12 @@ function MatchingInfo({formData, setFormData}) {
 			</select>
 			<br/>
 			<br/>
-			<label for="location">Enter your location (optional): </label>
-			<PlacesAutocomplete value={address} onChange={(event) => handleInputChange(event)} onSelect={handleSelect}>
+			<label htmlFor="location">Enter your location (optional): </label>
+			<PlacesAutocomplete value={formData.location} onChange={(event) => handleInputChange(event)} onSelect={handleSelect}>
 				{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
 					<div className="location-div">
-						<input {...getInputProps({placeholder: "Search Places ..."})}className="form-input" name="location" id="location" type="text"></input>
+						<input {...getInputProps({placeholder: "Search Places ..."})}className="form-input" name="location" id="location" type="text" >
+					</input>
 						<div className="locations-dropdown">
 							{loading ? <div>...loading</div>:null}
 
