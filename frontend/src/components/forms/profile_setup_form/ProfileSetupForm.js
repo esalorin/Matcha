@@ -11,6 +11,8 @@ const ProfileSetupForm = () => {
 	const [formData, setFormData] = useState({
 		age: "",
 		location: "",
+		lat: "",
+		lng: "",
 		gender: "",
 		sexuality: "",
 		tags: {
@@ -31,7 +33,24 @@ const ProfileSetupForm = () => {
 	});
 
 	const FormTitles = ["Dating information", "Tell us who you are", "Finally some pictures"];
+	
+	axios.defaults.withCredentials = true
 
+	const getLocation = () => {
+		if (navigator.geolocation) {
+		  navigator.geolocation.getCurrentPosition(savePosition, console.log);
+		} else {
+		  console.log("Geolocation is not supported by this browser.");
+		}
+	  }
+	  
+	  function savePosition(position) {
+		  setFormData({
+			  ...formData,
+			  lat: position.coords.latitude,
+			  lng: position.coords.longitude
+		  })
+	  }
 
 	const DisplayPage = () => {
 		if (page === 0)
@@ -40,6 +59,13 @@ const ProfileSetupForm = () => {
 			return <PersonInfo formData={formData} setFormData={setFormData}/>;
 		else
 			return <PictureInfo formData={formData} setFormData={setFormData}/>;
+	}
+
+	const submitForm = () => {
+		if (!formData.lat && !formData.lng)
+			getLocation();
+		console.log(formData.lat);
+		console.log(formData.lng);
 	}
 
 	return (
@@ -59,11 +85,14 @@ const ProfileSetupForm = () => {
 						setPage((currPage) => currPage - 1);}}>
 							<p className="button-text">Previous</p>
 					</button>
-					<button className='button' type="button"
+					<button className='button' type="button" style={{display: page === 2 ? 'none' : 'inline'}}
 					disabled={page === 2}
 					onClick={() => {
 						setPage((currPage) => currPage + 1);}}>
 							<p className="button-text">Next</p>
+					</button>
+					<button className='button' type="button" style={{display: page === 2 ? 'inline' : 'none'}} onClick={submitForm}>
+						<p className="button-text">Save</p>
 					</button>
 				</div>
 			</div>

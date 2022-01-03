@@ -3,15 +3,10 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng} from 'react-places-aut
 
 
 function MatchingInfo({formData, setFormData}) {
-	const [address, setAddress] = useState("");
-	const [coordinates, setCoordinates] = useState({
-		lat: null,
-		lng: null
-	});
 
 	const handleInputChange = (event) => {
 		setFormData({
-			...formData, location: event
+			...formData, location: event, lat: "", lng: ""
 		});
 	}
 
@@ -19,11 +14,8 @@ function MatchingInfo({formData, setFormData}) {
 		const result = await geocodeByAddress(value);
 		const latLng  = await getLatLng(result[0]);
 		setFormData({
-			...formData, location: value
+			...formData, location: value, lat: latLng.lat, lng: latLng.lng
 		});
-		setCoordinates(latLng);
-		console.log(latLng);
-		console.log(value);
 
 	}
 
